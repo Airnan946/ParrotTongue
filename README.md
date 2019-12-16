@@ -1,7 +1,10 @@
 ## ParrotTongue
 
 文转音-安卓调用系统TTS实现文字转语音并保存为mp3音频文件。
+
 官方网站：https://projects.whn946.cn/wzy/
+
+开发环境：Android Studio 3.5.2、JDK:1.8.0_202-release-1483-b03 amd64、Gradle：gradle-5.4.1
 
 ## 更新日志
 
