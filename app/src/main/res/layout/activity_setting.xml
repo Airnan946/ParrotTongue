@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="right"
+        android:orientation="horizontal"
+        android:background="#FFFFFF">
+
+        <ImageView
+            android:id="@+id/backBtn"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:padding="16dp"
+            app:srcCompat="@drawable/icon_close" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:gravity="center_vertical"
+            android:text="关于"
+            android:textSize="16dp"
+            android:textColor="#404040"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:src="@mipmap/ic_launcher" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ededed"
+        android:orientation="vertical">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="文转音"
+            android:textSize="16dp"
+            android:textColor="#404040" />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_marginBottom="1px"
+            android:background="#FFFFFF"
+            android:gravity="center"
+            android:text="V1.1"
+            android:textColor="#404040" />
+
+        <TextView
+            android:id="@+id/toDwnBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1px"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="下载更多引擎"
+            android:textColor="#404040" />
+        <TextView
+            android:id="@+id/qqPBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="联系作者：@章鱼小哥（点击聊天）"
+            android:textColor="#404040" />
+
+
+        <TextView
+            android:id="@+id/qqGBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1px"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="QQ交流群：625141779（点击加群）"
+            android:textColor="#404040" />
+        <TextView
+            android:id="@+id/viewHelpBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="软件使用帮助"
+            android:textColor="#404040"/>
+        <TextView
+            android:id="@+id/viewPrivacyBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="用户隐私协议"
+            android:textColor="#404040"/>
+        <TextView
+            android:id="@+id/checkUpdBtn"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginBottom="1px"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="检测更新"
+            android:textColor="#404040"/>
+
+    </LinearLayout>
+</LinearLayout>
