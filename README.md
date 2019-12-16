@@ -4,7 +4,11 @@
 
 官方网站：https://projects.whn946.cn/wzy/
 
-开发环境：Android Studio 3.5.2、JDK:1.8.0_202-release-1483-b03 amd64、Gradle：gradle-5.4.1
+开发环境：
+
++ IDE:Android Studio 3.5.2
++ JDK:1.8.0_202
++ Gradle:gradle-5.4.1
 
 ## 更新日志
 
