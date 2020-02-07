@@ -58,7 +58,7 @@
             android:layout_marginBottom="1px"
             android:background="#FFFFFF"
             android:gravity="center"
-            android:text="V1.1"
+            android:text="V2.0"
             android:textColor="#404040" />
 
         <TextView

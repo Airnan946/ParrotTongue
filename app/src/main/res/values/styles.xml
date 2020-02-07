@@ -7,5 +7,20 @@
         <item name="colorPrimaryDark">#515151</item>
         <item name="colorAccent">#515151</item>
     </style>
-
+    <style name="RippleWhite">
+        <item name="android:colorControlHighlight">#44ffffff</item>
+        <item name="android:radius">100dp</item>
+    </style>
+    <style name="Ripple50">
+        <item name="android:colorControlHighlight">#55ffffff</item>
+        <item name="android:radius">50dp</item>
+    </style>
+    <style name="Ripple300">
+        <item name="android:colorControlHighlight">#22000000</item>
+        <item name="android:radius">300dp</item>
+    </style>
+    <style name="RippleDefBtn">
+        <item name="android:colorControlHighlight">#22000000</item>
+        <item name="android:radius">50dp</item>
+    </style>
 </resources>

@@ -40,37 +40,38 @@
         android:layout_height="match_parent"
         android:background="#ededed"
         android:orientation="vertical">
-<!--小爱-->
+        <!--小爱-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#FFFFFF"
-            android:foreground="?android:selectableItemBackground"
-            android:clickable="true"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp"
-            android:elevation="3dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:elevation="1dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="小爱语音引擎"
                     android:textColor="#404040"
                     android:textSize="16dp" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="小爱语音引擎提取自MIUI11，可能不兼容某些系统，但是声音真的好听，可以试一下！"
-                    android:textColor="#616161"/>
+                    android:text="提取自MIUI11，声音超级好听！"
+                    android:textColor="#616161" />
             </LinearLayout>
 
             <Button
@@ -78,44 +79,44 @@
                 android:layout_width="60dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#ffffff"
                 android:background="@drawable/blue_btn_bg"
-                android:text="下载" />
+                android:text="下载"
+                android:textColor="#ffffff" />
         </LinearLayout>
-<!--讯飞-->
+        <!--讯飞-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#FFFFFF"
-            android:foreground="?android:selectableItemBackground"
-            android:clickable="true"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp"
-            android:elevation="3dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:elevation="1dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="讯飞语音引擎"
                     android:textColor="#404040"
                     android:textSize="16dp" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="讯飞语音引擎是使用最广泛的语音引擎，但是在某些MIUI上会有异常。"
-                    android:textColor="#616161"/>
+                    android:text="众所周知的讯飞。"
+                    android:textColor="#616161" />
             </LinearLayout>
 
             <Button
@@ -123,45 +124,45 @@
                 android:layout_width="60dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#ffffff"
                 android:background="@drawable/blue_btn_bg"
-                android:text="下载" />
+                android:text="下载"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <!--谷歌-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#FFFFFF"
-            android:foreground="?android:selectableItemBackground"
-            android:clickable="true"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp"
-            android:elevation="3dp"
+            android:background="#FFFFFF"
+            android:clickable="true"
+            android:elevation="1dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="谷歌文字转语音引擎"
                     android:textColor="#404040"
                     android:textSize="16dp" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="谷歌文字转语音引擎的兼容性非常棒，音色非常清晰，但是语调太高会破音..."
-                    android:textColor="#616161"/>
+                    android:text="音色非常清晰！"
+                    android:textColor="#616161" />
             </LinearLayout>
 
             <Button
@@ -169,45 +170,44 @@
                 android:layout_width="60dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#ffffff"
                 android:background="@drawable/blue_btn_bg"
-                android:text="下载" />
+                android:text="下载"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
         <!--度秘-->
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="80dp"
-            android:background="#FFFFFF"
-            android:foreground="?android:selectableItemBackground"
-            android:clickable="true"
+            android:layout_height="60dp"
             android:layout_marginBottom="5dp"
-            android:elevation="3dp"
+            android:background="#FFFFFF"
+            android:elevation="1dp"
             android:orientation="horizontal">
 
             <LinearLayout
                 android:layout_width="0dp"
-                android:layout_weight="1"
                 android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:orientation="vertical">
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
                     android:gravity="center_vertical"
                     android:paddingLeft="20dp"
                     android:text="度秘语音引擎"
                     android:textColor="#404040"
                     android:textSize="16dp" />
+
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="30dp"
+                    android:gravity="center_vertical"
                     android:paddingLeft="20dp"
-                    android:text="度秘语音引擎也是相当不错，兼容性一般般..."
-                    android:textColor="#616161"/>
+                    android:text="知名度不高，还不错！"
+                    android:textColor="#616161" />
             </LinearLayout>
 
             <Button
@@ -215,18 +215,14 @@
                 android:layout_width="60dp"
                 android:layout_height="32dp"
                 android:layout_marginLeft="20dp"
+                android:layout_marginTop="14dp"
                 android:layout_marginRight="20dp"
-                android:layout_marginTop="24dp"
-                android:layout_marginBottom="24dp"
-                android:textColor="#ffffff"
                 android:background="@drawable/blue_btn_bg"
-                android:text="下载" />
+                android:text="下载"
+                android:textColor="#ffffff" />
         </LinearLayout>
 
     </LinearLayout>
-
-
-
 
 
 </LinearLayout>

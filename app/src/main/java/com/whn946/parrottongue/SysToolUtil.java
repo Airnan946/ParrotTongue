@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -11,41 +12,8 @@ import android.net.Uri;
 import android.os.Handler;
 import android.os.Looper;
 
+
 public class SysToolUtil {
-
-    public String help_str = "\t\t本软件（文转音）由章鱼小哥开发，隶属于章鱼哥之家工作室作品，软件仅供学习、研究使用。" +
-            "\n\n● 试听音频：\n\t\t在文本框中输入文本点击播放即可。" +
-            "\n\n● 调节音效：\n\t\t无音频播放时，滑动语调、语速进行调整。" +
-            "\n\n● 切换引擎：\n\t\t点击切换引擎工具条进行选择。" +
-            "\n\n● 下载引擎：\n\t\t在关于页面点击[下载更多引擎]进行选择下载。" +
-            "\n\n● 问题反馈：\n\t\t在关于页面加群或直接与我联系进行反馈。";
-    public String privacy_str = "\t\t本软件尊重并保护所有使用服务用户的个人隐私权。" +
-            "为了给您提供更准确、更有个性化的服务，本软件会按照本隐私权政策的规定使用和披露您的个人信息。" +
-            "但本软件将以高度的勤勉、审慎义务对待这些信息。除本隐私权政策另有规定外，" +
-            "在未征得您事先许可的情况下，本软件不会将这些信息对外披露或向第三方提供。本软件会不时更新本隐私权政策。" +
-            "您在同意本软件服务使用协议之时，即视为您已经同意本隐私权政策全部内容。本隐私权政策属于本软件服务使用协议不可分割的一部分。" +
-            "\n\n本软件共申请三项权限：\n\t\t1：读取您的SD卡中的内容。\n\t\t2：修改或删除您的SD卡中的内容。\n\t\t3：网络访问" +
-            "\n前两项权限仅用于导出mp3音频至本地储存空间，第三项仅用于检测更新。" +
-            "\n\n\t\t除以上说明外，本软件并不含有任何收集用户隐私的地方。如今后需要会另行通知。";
-
-    /**
-     * 获取VersionCode
-     *
-     * @param context
-     * @return
-     */
-    public static String getVersionCode(Context context) {
-        PackageInfo pInfo = null;
-        String version = "NotFound";
-        try {
-            pInfo = context.getPackageManager().getPackageInfo(context.getPackageName(), 0);
-            version = pInfo.versionCode + ""; //如果获取序列号则使用 pInfo.versionCode
-
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return version;
-    }
 
     /**
      * 普通消息Alert
@@ -136,6 +104,30 @@ public class SysToolUtil {
         Intent intent = new Intent(Intent.ACTION_DELETE);
         intent.setData(packageURI);
         context.startActivity(intent);
+    }
+
+    /**
+     * 设定默认配置
+     */
+    public static void setDefConfig(Context context) {
+        //记录初次启动
+        SharedPreferences app_run = context.getSharedPreferences("app_run", Context.MODE_PRIVATE);
+        SharedPreferences.Editor app_run_editor = app_run.edit();
+        app_run_editor.putBoolean("runtime", true);
+        app_run_editor.apply();
+        //配置默认引擎语言
+        SharedPreferences tts_lan = context.getSharedPreferences("tts_lan", Context.MODE_PRIVATE);
+        SharedPreferences.Editor tts_lan_editor = tts_lan.edit();
+        tts_lan_editor.putString("tts_lan", "CHINA");
+        tts_lan_editor.apply();
+        //配置排号模式默认数据
+        SharedPreferences config_num_mode = context.getSharedPreferences("config_num_mode", Context.MODE_PRIVATE);
+        SharedPreferences.Editor config_num_mode_editor = config_num_mode.edit();
+        config_num_mode_editor.putString("number", "0001");
+        config_num_mode_editor.putString("leftstr", "请");
+        config_num_mode_editor.putString("rightstr", "号顾客取餐");
+        config_num_mode_editor.apply();
+
     }
 
 }

@@ -1,35 +1,32 @@
 package com.whn946.parrottongue;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.content.SharedPreferences;
-import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
 import android.speech.tts.TextToSpeech;
 import android.speech.tts.UtteranceProgressListener;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
+import android.widget.CompoundButton;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.Switch;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
 import java.io.File;
 import java.io.IOException;
@@ -38,47 +35,45 @@ import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
-import java.util.Locale;
 import java.util.Map;
 
-public class MainActivity extends AppCompatActivity {
+public class DefaultModeActivity extends AppCompatActivity {
     private Map tts_map = new HashMap();
-    private InternetUtil internetUtil = new InternetUtil();
     private SysToolUtil sysToolUtil = new SysToolUtil();
-    private Context mc = MainActivity.this;
+    private Context mc = DefaultModeActivity.this;
     private EditText aet;
     private TextToSpeech tts;
     private EditText et;
     private TextView tb;
-    private Button speakBtn;
-    private Button stopBtn;
-    private Button trimBtn;
-    private Button saveBtn;
+    private ImageView speakBtn;
+    private ImageView stopBtn;
+    private ImageView trimBtn;
+    private ImageView saveBtn;
+    private ImageView openConfigBtn;
+    private LinearLayout config_panl;
     private TextView textNum;
     private Spinner ttsListSp;
-    private TextView tv_pitch;//音调tv
-    private TextView tv_speechRate;//语速tv
     private SeekBar pitchBar;//音调bar
     private SeekBar speechRateBar;//语速bar
+    private Switch loop_switch;
     private float pitchNum = 1.0f;
     private float speechRateNum = 1.0f;
+    private int config_panl_state = 0;
+    private boolean isLoop = false;
+    private EditText loop_num_et;
+    private int loopNum = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_defaultmode);
         StatusBarUtil.transparencyBar(this); //设置状态栏全透明
         StatusBarUtil.StatusBarLightMode(this); //设置白底黑字
         init();
     }
 
 
-
     private void init() {
-        //检查权限
-        pms_check();
-        //检测更新
-        checkVersion();
         //初始化控件
         tb = findViewById(R.id.top_bar);
         et = findViewById(R.id.textarea);
@@ -86,12 +81,14 @@ public class MainActivity extends AppCompatActivity {
         stopBtn = findViewById(R.id.stopBtn);
         trimBtn = findViewById(R.id.trimBtn);
         saveBtn = findViewById(R.id.saveBtn);
+        openConfigBtn = findViewById(R.id.openConfigBtn);
+        config_panl = findViewById(R.id.config_panl);
         textNum = findViewById(R.id.tv_text_num);
-        tv_pitch = findViewById(R.id.tv_pitch);
-        tv_speechRate = findViewById(R.id.tv_speechRate);
         pitchBar = findViewById(R.id.pitchBar);
         speechRateBar = findViewById(R.id.speechRateBar);
         ttsListSp = findViewById(R.id.ttsListSp);
+        loop_switch = findViewById(R.id.loop_switch);
+        loop_num_et = findViewById(R.id.loop_num_et);
         //加载历史数据并更新控件状态
         runOnUiThread(new Runnable() {
             @Override
@@ -102,7 +99,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
+        getTtsListData();
         ttsListSp.setOnItemSelectedListener(new Spinner.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -114,17 +111,32 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
-
-
-        //跳转关于界面
-        findViewById(R.id.toSetting).setOnClickListener(new View.OnClickListener() {
+        //循环按钮
+        loop_switch.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
-            public void onClick(View arg0) {
-                Intent intent = new Intent(MainActivity.this,
-                        SettingActivity.class);
-                startActivity(intent);
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                isLoop = isChecked;
             }
         });
+        //打开参数配置面板
+        openConfigBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View arg0) {
+                if (config_panl_state == 0) {
+                    //参数面板
+                    config_panl.setVisibility(View.VISIBLE);
+                    config_panl.setAnimation(AnimationUtils.makeInAnimation(DefaultModeActivity.this, true));
+                    config_panl_state = 1;
+                } else {
+                    //参数面板
+                    config_panl.setVisibility(View.GONE);
+                    config_panl.setAnimation(AnimationUtils.makeOutAnimation(DefaultModeActivity.this, false));
+                    config_panl_state = 0;
+                }
+
+            }
+        });
+
 
         //开始朗读
         speakBtn.setOnClickListener(new View.OnClickListener() {
@@ -138,6 +150,7 @@ public class MainActivity extends AppCompatActivity {
                 } else {
                     tts.speak(str, TextToSpeech.QUEUE_FLUSH, null, getString(R.string.app_name));
                 }
+                setLoopNum();
 
             }
         });
@@ -147,7 +160,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View arg0) {
                 if (tts.isSpeaking()) {
                     tts.stop();
-                    setTextViewWord(tb, "文转音");
+                    setTextViewWord(tb, "默认模式");
                     //开启滑块
                     onOffSeekBar(true);
                 }
@@ -222,7 +235,7 @@ public class MainActivity extends AppCompatActivity {
                 et.setText("");
                 if (tts.isSpeaking()) {
                     tts.stop();
-                    setTextViewWord(tb, "文转音");
+                    setTextViewWord(tb, "默认模式");
                     //开启滑块
                     onOffSeekBar(true);
                 }
@@ -280,16 +293,16 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean pms_check() {
-        int writeCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        int internetCheck = ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.INTERNET);
+        int writeCheck = ContextCompat.checkSelfPermission(DefaultModeActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int internetCheck = ContextCompat.checkSelfPermission(DefaultModeActivity.this, Manifest.permission.INTERNET);
         if (writeCheck < 0 || internetCheck < 0) {
-            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this)
+            AlertDialog.Builder builder = new AlertDialog.Builder(DefaultModeActivity.this)
                     .setTitle("权限申请")
                     .setMessage("即将申请手机储存读写权限，该权限仅用于保存并导出音频文件。")
                     .setPositiveButton("好的", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
-                            ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, 2);
+                            ActivityCompat.requestPermissions(DefaultModeActivity.this, new String[]{Manifest.permission.MOUNT_UNMOUNT_FILESYSTEMS, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.INTERNET}, 2);
                         }
                     })
                     .setNegativeButton("拒绝", new DialogInterface.OnClickListener() {
@@ -340,7 +353,9 @@ public class MainActivity extends AppCompatActivity {
                 speechRateBar.setSelected(state);
                 speechRateBar.setFocusable(state);
                 ttsListSp.setEnabled(state);
+                loop_switch.setEnabled(state);
                 et.setEnabled(state);
+                loop_num_et.setEnabled(state);
                 if (state) {
                     speakBtn.setVisibility(View.VISIBLE);
                     stopBtn.setVisibility(View.GONE);
@@ -387,44 +402,20 @@ public class MainActivity extends AppCompatActivity {
             editor.putString("history_text", et.getText().toString());
             editor.commit();
         }
-        setTextViewWord(textNum, "字数：" + et.getText().toString().length() + "/4000");
+        setTextViewWord(textNum, et.getText().toString().length() + "字");
     }
 
-    /**
-     * 启动检测更新
-     */
-    public void checkVersion() {
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    internetUtil.checkData(internetUtil.checkUpdate(MainActivity.this), true, MainActivity.this);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        }).start();
-    }
-
-    @Override
-    public void onBackPressed() {
-        android.app.AlertDialog.Builder builder = new android.app.AlertDialog.Builder(mc).setTitle("确认要退出吗?")
-                .setPositiveButton("退出", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        tts.shutdown();
-                        MainActivity.this.finish();
-                    }
-                })
-                .setNegativeButton("取消", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        android.app.AlertDialog alertDialog = builder.create();
-        alertDialog.setCanceledOnTouchOutside(false);
-        alertDialog.show();
+    //获取循环次数
+    public void setLoopNum() {
+        if (loop_num_et.getText().toString().trim().equals("")) {
+            loopNum = 10;
+            loop_num_et.setText("10");
+        } else if (Integer.valueOf(loop_num_et.getText().toString()) == 0) {
+            loopNum = 10;
+            loop_num_et.setText("10");
+        } else {
+            loopNum = Integer.valueOf(loop_num_et.getText().toString());
+        }
     }
 
 
@@ -440,11 +431,11 @@ public class MainActivity extends AppCompatActivity {
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, tts_spinner_list);  //创建一个数组适配器
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);     //设置下拉列表框的下拉选项样式
         ttsListSp.setAdapter(adapter);
-        tts = AudioUtil.initSysTTS(mc, tts_map.get(ttsListSp.getSelectedItem().toString()).toString());
+        tts = AudioUtil.initTTS(mc, tts_map.get(ttsListSp.getSelectedItem().toString()).toString());
         tts.setOnUtteranceProgressListener(new UtteranceProgressListener() {
             @Override
             public void onStart(String utteranceId) {
-                setTextViewWord(tb, "文转音 - 朗读中...");
+                setTextViewWord(tb, "默认模式 - 朗读中...");
                 //关闭滑块
                 onOffSeekBar(false);
             }
@@ -452,9 +443,19 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onDone(String utteranceId) {
                 tts.stop();
-                //开启滑块
-                onOffSeekBar(true);
-                setTextViewWord(tb, "文转音");
+                if (isLoop && loopNum > 1) {
+                    String str = et.getText().toString();
+                    if (!tts.isSpeaking()) {
+                        tts.speak(str, TextToSpeech.QUEUE_ADD, null, getString(R.string.app_name));
+                    }
+                    loopNum--;
+                } else {
+                    tts.stop();
+                    //开启滑块
+                    onOffSeekBar(true);
+                    setTextViewWord(tb, "默认模式");
+                }
+
             }
 
             @Override
@@ -468,10 +469,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
-    protected void onStart() {
-        super.onStart();
-        //初始化TTS引擎
-        getTtsListData();
-
+    protected void onDestroy() {
+        tts.stop();
+        super.onDestroy();
     }
+
 }

@@ -16,15 +16,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".SettingActivity" />
-        <activity android:name=".DwnttsActivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".HomeActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".SettingActivity" />
+        <activity android:name=".ConfigActivity" />
+        <activity android:name=".DefaultModeActivity" />
+        <activity android:name=".NumModeActivity" />
+        <activity android:name=".DwnttsActivity" />
+        <activity android:name=".WebActivity" />
     </application>
 
 </manifest>

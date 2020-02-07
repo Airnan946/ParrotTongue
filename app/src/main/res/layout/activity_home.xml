@@ -1,0 +1,363 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f5f5f5"
+    android:fitsSystemWindows="true"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="right"
+        android:orientation="horizontal">
+
+        <TextView
+            android:id="@+id/top_bar"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:gravity="center_vertical"
+            android:paddingLeft="20dp"
+            android:text="文转音"
+            android:textColor="#404040"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <ImageView
+            android:id="@+id/toSetting"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:foreground="?android:selectableItemBackground"
+            android:padding="16dp"
+            app:srcCompat="@drawable/icon_menu" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!--使用说明-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginLeft="20dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/home_mode_radius_banner"
+                android:elevation="10dp"
+                android:orientation="horizontal">
+                <ImageView
+                    android:layout_width="130dp"
+                    android:layout_height="match_parent"
+                    app:srcCompat="@drawable/banner" />
+                <Button
+                    android:id="@+id/to_memo_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="-130dp"
+                    android:background="?android:attr/selectableItemBackgroundBorderless"
+                    android:text="点 此 查 看\n\n使 用 教 程"
+                    android:textColor="#ffffff"
+                    android:textSize="26dp"
+                    android:gravity="center_vertical"
+                    android:paddingLeft="150dp"
+                    android:theme="@style/Ripple300" />
+
+            </LinearLayout>
+            <!--模式选择区-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:paddingLeft="20dp"
+                android:text="模式选择(2)"
+                android:textColor="#151515"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:paddingBottom="10dp">
+
+                <!--默认模式-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/home_mode_radius_blue"
+                    android:elevation="2dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/home_mode_icon_blue"
+                        android:elevation="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="15dp"
+                            app:srcCompat="@drawable/icon_home_default" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="默认模式"
+                            android:textColor="#151515"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="任意文本输入即可播放"
+                            android:textColor="#606060"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/home_mode_open_blue"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/to_mode_def"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:padding="10dp"
+                            android:theme="@style/Ripple50"
+                            app:srcCompat="@drawable/home_open" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!--排号模式-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="90dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="@drawable/home_mode_radius_red"
+                    android:elevation="2dp"
+                    android:orientation="horizontal">
+
+                    <LinearLayout
+                        android:layout_width="60dp"
+                        android:layout_height="60dp"
+                        android:layout_margin="15dp"
+                        android:background="@drawable/home_mode_icon_red"
+                        android:elevation="10dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:padding="15dp"
+                            app:srcCompat="@drawable/icon_home_num" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        android:orientation="vertical"
+                        android:paddingTop="20dp"
+                        android:paddingBottom="20dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="排号模式"
+                            android:textColor="#151515"
+                            android:textSize="20dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="25dp"
+                            android:text="适用于餐饮店排号报号"
+                            android:textColor="#606060"
+                            android:textSize="16dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="50dp"
+                        android:layout_height="match_parent"
+                        android:background="@drawable/home_mode_open_red"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:id="@+id/to_mode_num"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="?android:attr/selectableItemBackgroundBorderless"
+                            android:clickable="true"
+                            android:padding="10dp"
+                            android:theme="@style/Ripple50"
+                            app:srcCompat="@drawable/home_open" />
+                    </LinearLayout>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <!--附加功能-->
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:paddingLeft="20dp"
+                android:text="更多"
+                android:textColor="#151515"
+                android:textSize="22dp"
+                android:textStyle="bold" />
+
+            <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp">
+
+                    <!--配置选项-->
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/home_mode_icon_setting"
+                            android:elevation="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/num_config_btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:padding="15dp"
+                                android:theme="@style/Ripple50"
+                                app:srcCompat="@drawable/icon_home_setting" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:gravity="center"
+                            android:text="配置选项"
+                            android:textColor="#606060" />
+
+                    </LinearLayout>
+                    <!--分享软件-->
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/home_mode_icon_share"
+                            android:elevation="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/home_to_share_btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:padding="18dp"
+                                android:theme="@style/Ripple50"
+                                app:srcCompat="@drawable/icon_home_share" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:gravity="center"
+                            android:text="分享软件"
+                            android:textColor="#606060" />
+
+                    </LinearLayout>
+                    <!--打赏作者-->
+                    <LinearLayout
+                        android:layout_width="80dp"
+                        android:layout_height="100dp"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_margin="10dp"
+                            android:background="@drawable/home_mode_icon_money"
+                            android:elevation="10dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/home_to_money_btn"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:background="?android:attr/selectableItemBackgroundBorderless"
+                                android:clickable="true"
+                                android:padding="15dp"
+                                android:theme="@style/Ripple50"
+                                app:srcCompat="@drawable/icon_home_money" />
+                        </LinearLayout>
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="20dp"
+                            android:gravity="center"
+                            android:text="打赏作者"
+                            android:textColor="#606060" />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </HorizontalScrollView>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

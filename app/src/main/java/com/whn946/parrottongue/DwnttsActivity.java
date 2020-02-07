@@ -1,19 +1,15 @@
 package com.whn946.parrottongue;
 
-import android.app.Activity;
-import android.app.Application;
 import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebView;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
 public class DwnttsActivity extends AppCompatActivity {
-    private InternetUtil internetUtil = new InternetUtil();
     private SysToolUtil sysToolUtil = new SysToolUtil();
     private Context dc = DwnttsActivity.this;
     private ImageView backBtn;

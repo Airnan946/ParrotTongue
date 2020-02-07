@@ -7,14 +7,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import java.io.IOException;
 
 public class SettingActivity extends AppCompatActivity {
-    private InternetUtil internetUtil = new InternetUtil();
     private SysToolUtil sysToolUtil = new SysToolUtil();
     private Context sc = SettingActivity.this;
     private ImageView backBtn;
@@ -74,35 +71,33 @@ public class SettingActivity extends AppCompatActivity {
                 openQQ(0);
             }
         });
-        //免责声明
+        //帮助文档
         viewHelpBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sysToolUtil.msgAlert("软件使用帮助", sysToolUtil.help_str, "晓得啦", sc);
+                Intent intent = new Intent(SettingActivity.this,
+                        WebActivity.class);
+                intent.putExtra("openUrl","https://version.whn946.cn/help.html");
+                startActivity(intent);
             }
         });
+        //隐私协议
         viewPrivacyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                sysToolUtil.msgAlert("用户隐私协议", sysToolUtil.privacy_str, "晓得啦", sc);
+                Intent intent = new Intent(SettingActivity.this,
+                        WebActivity.class);
+                intent.putExtra("openUrl","https://version.whn946.cn/privacy.html");
+                startActivity(intent);
             }
         });
         checkUpdBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View arg0) {
-                Toast.makeText(sc, "检测中请稍等...", Toast.LENGTH_SHORT).show();
-                new Thread(new Runnable() {
-                    @Override
-                    public void run() {
-                        try {
-                            internetUtil.checkData(internetUtil.checkUpdate(SettingActivity.this), false, sc);
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }).start();
-
-
+                Intent intent = new Intent(SettingActivity.this,
+                        WebActivity.class);
+                intent.putExtra("openUrl","https://version.whn946.cn/update.html?cversion=2.0");
+                startActivity(intent);
             }
         });
     }
